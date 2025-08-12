@@ -13,18 +13,19 @@ load_dotenv(encoding='utf-8')
 
 client_id = os.getenv('ID')
 client_secret = os.getenv('SECRET_ID')
+redirect_url = os.getenv('REDIRECT_URL')
 
 def main(page: ft.Page):
     page.title = "Treino Quest"
     page.go("/")
 
     # Certifica que as secrets foram carregadas.
-    if not client_id or not client_secret:
-        print("Erro: ID e/ou SECRET_ID não foram carregados das variáveis de ambiente.")
+    if not client_id or not client_secret or not redirect_url:
+        print("Erro: ID, SECRET_ID e/ou REDIRECT_URL não foram carregados das variáveis de ambiente.")
         # Exibe uma mensagem de erro na tela caso as secrets não estejam configuradas.
         page.add(
             ft.Text(
-                "Erro de configuração: ID e SECRET_ID não encontrados. Por favor, configure as secrets no GitHub.",
+                "Erro de configuração: ID, SECRET_ID ou REDIRECT_URL não encontrados. Por favor, configure as secrets no GitHub.",
                 size=20,
                 color=ft.colors.RED_500
             )
@@ -35,7 +36,7 @@ def main(page: ft.Page):
     provider = GoogleOAuthProvider(
         client_id=client_id,
         client_secret=client_secret,
-        redirect_url='https://cleristonjr.github.io/TesteWebFlet/oauth_callback'
+        redirect_url=redirect_url
     )
 
     def logingoogle(e):
