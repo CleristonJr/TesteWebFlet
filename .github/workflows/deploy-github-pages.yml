@@ -20,7 +20,9 @@ env:
   BUILD_VERSION: 1.0.0
   PYTHON_VERSION: 3.12.2
   FLUTTER_VERSION: 3.22.2
-  PROJECT_PATH: my_flutter_app # <-- Variável de ambiente para o caminho do seu projeto
+  # Removido o PROJECT_PATH, assumindo que o projeto Flutter está na raiz.
+  # Se o seu projeto estiver em uma subpasta, reintroduza esta variável
+  # e ajuste o valor.
 
 jobs:
   build:
@@ -46,25 +48,21 @@ jobs:
         channel: stable
         cache: true # Enable caching
 
-    # Adicione working-directory a todas as etapas do Flutter para garantir que os comandos
-    # sejam executados no diretório correto do projeto.
+    # Removido working-directory, assumindo que o comando pode ser executado na raiz do repositório
     - name: Install Flutter dependencies
       run: flutter pub get
-      working-directory: ${{ env.PROJECT_PATH }}
 
     - name: Run Flutter doctor
       run: flutter doctor
-      working-directory: ${{ env.PROJECT_PATH }}
     
     - name: Build Flutter web app
       run: flutter build web --base-url /${GITHUB_REPOSITORY#*/} --route-url-strategy hash
-      working-directory: ${{ env.PROJECT_PATH }}
 
     - name: Upload pages artifact
       uses: actions/upload-pages-artifact@v3
       with:
         name: web-build-artifact
-        path: ${{ env.PROJECT_PATH }}/build/web
+        path: build/web
 
   deploy:
     needs: build
