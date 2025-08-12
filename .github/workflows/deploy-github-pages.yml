@@ -41,6 +41,10 @@ jobs:
     
     # Esta é a etapa crucial para projetos Flet: construir o site.
     - name: Build Flet web app
+      # Passa as secrets como variáveis de ambiente para o comando de build
+      env:
+        ID: ${{ secrets.ID }}
+        SECRET_ID: ${{ secrets.SECRET_ID }}
       run: flet build web --base-url /${GITHUB_REPOSITORY#*/} --route-url-strategy hash
 
     - name: Upload pages artifact
