@@ -28,7 +28,7 @@ def main(page: ft.Page):
         )
         page.update()
         return
-
+    redirect_url='https://cleristonjr.github.io/TesteWebFlet/'
     provider = GoogleOAuthProvider(
         client_id=client_id,
         client_secret=client_secret,
