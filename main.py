@@ -11,6 +11,7 @@ client_secret = os.getenv('SECRET_ID')
 redirect_url = os.getenv('REDIRECT_URL')
 
 def main(page: ft.Page):
+    print('Iniciando página') ################## INICIANDO PAGINA #######################
     page.title = "Login"
     page.go("/")
 
@@ -37,9 +38,11 @@ def main(page: ft.Page):
     textresult = ft.Column()
 
     def login_google(e):
+        print('INDO PARA O LOGIN GOOGLE') ################## INDO PARA O LOGIN GOOGLE #######################
         page.login(provider)
 
     def on_login(e):
+        print('VERIFICANDO O LOGIN GOOGLE') ################## VERIFICANDO O LOGIN GOOGLE #######################
         if page.auth.user:
             textresult.controls.clear()
             print(page.auth.user)
@@ -64,6 +67,7 @@ def main(page: ft.Page):
             page.update()
 
     def on_logout(e):
+        print('FAZENDO LOGOUT GOOGLE') ################## FAZENDO LOGOUT GOOGLE #######################
         page.logout()
         textresult.controls.clear()
         textresult.controls.append(ft.Text("Usuário deslogado."))
