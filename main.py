@@ -8,7 +8,7 @@ from alterar import paginaAlterarTreino
 import os
 from dotenv import load_dotenv
 
-# Carrega as variáveis de ambiente, que devem ser configuradas como secrets no GitHub
+# Carrega as variáveis de ambiente
 load_dotenv(encoding='utf-8')
 
 client_id = os.getenv('ID')
@@ -17,15 +17,13 @@ redirect_url = os.getenv('REDIRECT_URL')
 
 def main(page: ft.Page):
     page.title = "Treino Quest"
-    page.go("/")
 
-    # Certifica que as secrets foram carregadas.
+    # Verifica se as secrets foram carregadas corretamente
     if not client_id or not client_secret or not redirect_url:
-        print("Erro: ID, SECRET_ID e/ou REDIRECT_URL não foram carregados das variáveis de ambiente.")
-        # Exibe uma mensagem de erro na tela caso as secrets não estejam configuradas.
+        print("Erro: Variáveis de ambiente não carregadas.")
         page.add(
             ft.Text(
-                "Erro de configuração: ID, SECRET_ID ou REDIRECT_URL não encontrados. Por favor, configure as secrets no GitHub.",
+                "Erro de configuração: ID, SECRET_ID ou REDIRECT_URL não encontrados. Configure as secrets no GitHub.",
                 size=20,
                 color=ft.colors.RED_500
             )
@@ -39,20 +37,20 @@ def main(page: ft.Page):
         redirect_url=redirect_url
     )
 
-    def logingoogle(e):
+    def login_google(e):
         page.login(provider)
 
     def on_login(e):
         if page.auth.user:
-            print("Login bem-sucedido! Navegando para /inicial")
+            print("Login bem-sucedido!")
             page.go("/inicial")
         else:
             print("Login falhou.")
             page.go("/")
 
     def on_logout(e):
-        page.go("/login")
         page.logout()
+        page.go("/login")
 
     page.on_login = on_login
     page.on_logout = on_logout
@@ -61,25 +59,17 @@ def main(page: ft.Page):
         print(f"Rota atual: {page.route}")
         page.views.clear()
 
-        # Adiciona a view de acordo com a rota
         if page.route == "/inicial":
-            print("Carregando paginaInicio...")
             page.views.append(paginaInicio(page))
         elif page.route == "/descanso":
-            print("Carregando paginaDescanso...")
             page.views.append(paginaDescanso(page))
         elif page.route == "/treino":
-            print("Carregando paginaTreino...")
             page.views.append(paginaTreino(page))
         elif page.route == "/acabou":
-            print("Carregando paginaAcabou...")
             page.views.append(paginaAcabou(page))
         elif page.route == "/alterarTreino":
-            print("Carregando alterarTreino...")
             page.views.append(paginaAlterarTreino(page))
         else:
-            # Rota padrão: tela de login
-            print("Carregando tela de login...")
             page.views.append(
                 ft.View(
                     "/",
@@ -90,15 +80,15 @@ def main(page: ft.Page):
                         ),
                         ft.Container(
                             content=ft.Image(
-                                src='https://img.icons8.com/?size=512&id=17949&format=png'
+                                src='assets/google-icon.png'  # imagem local
                             ),
-                            height = 40,
-                            on_click=logingoogle,
-                            alignment = ft.alignment.center
+                            height=40,
+                            on_click=login_google,
+                            alignment=ft.alignment.center
                         ),
                     ],
-                    vertical_alignment= ft.MainAxisAlignment.CENTER,
-                    horizontal_alignment= ft.CrossAxisAlignment.CENTER
+                    vertical_alignment=ft.MainAxisAlignment.CENTER,
+                    horizontal_alignment=ft.CrossAxisAlignment.CENTER
                 )
             )
 
