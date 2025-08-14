@@ -1,2 +1,3 @@
 flet
 python-dotenv
+httpx
