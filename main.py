@@ -60,8 +60,6 @@ def main(page: ft.Page):
         else:
             textresult.controls.clear()
             textresult.controls.append(ft.Text("Login falhou."))
-            page.update()textresult.controls.clear()
-            textresult.controls.append(ft.Text("Login falhou."))
             print("Login falhou.")
             page.update()
 
