@@ -40,6 +40,9 @@ def main(page: ft.Page):
     def login_google(e):
         print('INDO PARA O LOGIN GOOGLE') ################## INDO PARA O LOGIN GOOGLE #######################
         page.login(provider)
+        print(client_id)
+        print(client_secret)
+        print(redirect_url)
 
     def on_login(e):
         print('VERIFICANDO O LOGIN GOOGLE') ################## VERIFICANDO O LOGIN GOOGLE #######################
