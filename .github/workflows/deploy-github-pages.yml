@@ -32,18 +32,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Create .env file
-      run: |
-        echo "ID=${{ secrets.ID }}" >> .env
-        echo "SECRET_ID=${{ secrets.SECRET_ID }}" >> .env
-        echo "REDIRECT_URL=${{ secrets.REDIRECT_URL }}" >> .env
-        echo "USUARIO=${{ secrets.USUARIO }}" >> .env
-        echo "SENHADB=${{ secrets.SENHADB }}" >> .env
-        echo "DB=${{ secrets.DB }}" >> .env
-        echo "HOST=${{ secrets.HOST }}" >> .env
-        echo "PORT=${{ secrets.PORT }}" >> .env
-
     - name: Build Flet web app
+      # As secrets do GitHub são passadas como variáveis de ambiente para a etapa de build.
+      env:
+        ID: ${{ secrets.ID }}
+        SECRET_ID: ${{ secrets.SECRET_ID }}
+        REDIRECT_URL: ${{ secrets.REDIRECT_URL }}
       run: flet build web --base-url /${GITHUB_REPOSITORY#*/} --route-url-strategy hash
 
     - name: Upload pages artifact
