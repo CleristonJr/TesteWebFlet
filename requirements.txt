@@ -2,3 +2,4 @@ flet
 python-dotenv
 httpx
 oauthlib
+requests_oauthlib
