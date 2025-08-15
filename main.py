@@ -1,44 +1,25 @@
 import flet as ft
 from inicio import paginaInicio
-import os
-from dotenv import load_dotenv
-
-# Carrega as variáveis de ambiente
-load_dotenv(encoding='utf-8')
+from treino import paginaTreino
 
 
 def main(page: ft.Page):
-    print('Iniciando página') ################## INICIANDO PAGINA #######################
-    page.title = "Login"
+    print('Iniciando página')
+    page.title = "Treino Quest"
     page.go("/")
 
-    # Verifica se as secrets foram carregadas corretamente
-  
-    textresult = ft.Column()
-
-    def login_google(e):
-        print('INDO PARA O LOGIN GOOGLE') ################## INDO PARA O LOGIN GOOGLE #######################
+    
+    def logingoogle(e):
+        print('INDO PARA O LOGIN GOOGLE')
         page.go("/inicial")
-        print("Navagando para inicio")
-      
+        
 
-    def on_login(e):
-        print('VERIFICANDO O LOGIN GOOGLE') ################## VERIFICANDO O LOGIN GOOGLE #######################
-       
-
-    def on_logout(e):
-        print('FAZENDO LOGOUT GOOGLE') ################## FAZENDO LOGOUT GOOGLE #######################
-        textresult.controls.clear()
-        textresult.controls.append(ft.Text("Usuário deslogado."))
-        page.update()
-
-    page.on_login = on_login
-    page.on_logout = on_logout
 
     def mudar_tela(route):
         print(f"Rota atual: {page.route}")
         page.views.clear()
-        
+
+        # Adiciona a view de acordo com a rota
         if page.route == "/inicial":
             print("Carregando paginaInicio...")
             try:
@@ -46,7 +27,12 @@ def main(page: ft.Page):
             except Exception as e:
                 print(f"Erro ao carregar paginaInicio: {e}")
                 page.views.append(ft.Text(f"Erro ao carregar paginaInicio: {e}"))
+        elif page.route == "/treino":
+            print("Carregando paginaTreino...")
+            page.views.append(paginaTreino(page))
         else:
+            # Rota padrão: tela de login
+            print("Carregando tela de login...")
             page.views.append(
                 ft.View(
                     "/",
@@ -57,10 +43,10 @@ def main(page: ft.Page):
                         ),
                         ft.Container(
                             content=ft.Image(
-                                src='https://img.icons8.com/?size=512&id=17949&format=png'  # imagem local
+                                src='https://img.icons8.com/?size=512&id=17949&format=png'
                             ),
                             height=40,
-                            on_click=login_google,
+                            on_click=logingoogle,
                             alignment=ft.alignment.center
                         ),
                     ],
