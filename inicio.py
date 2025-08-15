@@ -16,7 +16,7 @@ def paginaInicio(page: ft.Page):
 
     def tela_Treino(e):
         print("Navegando para Treino")
-        page.go("/treino")
+        #page.go("/treino")
 
     leading_content = ft.Text("Login")
 
@@ -25,8 +25,8 @@ def paginaInicio(page: ft.Page):
         if rail.selected_index == 1:
             print("Alterar Treino selecionado!")
             # Aqui, execute a função relacionada ao treino
-            page.go("/alterarTreino")
-            page.update()
+            #page.go("/alterarTreino")
+            #page.update()
 
 
     rail = ft.NavigationRail(

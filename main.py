@@ -1,6 +1,5 @@
 import flet as ft
 from inicio import paginaInicio
-from treino import paginaTreino
 
 
 def main(page: ft.Page):
@@ -27,9 +26,7 @@ def main(page: ft.Page):
             except Exception as e:
                 print(f"Erro ao carregar paginaInicio: {e}")
                 page.views.append(ft.Text(f"Erro ao carregar paginaInicio: {e}"))
-        elif page.route == "/treino":
-            print("Carregando paginaTreino...")
-            page.views.append(paginaTreino(page))
+        
         else:
             # Rota padrão: tela de login
             print("Carregando tela de login...")
