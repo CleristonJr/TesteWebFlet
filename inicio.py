@@ -17,9 +17,9 @@ def manipular_excel(e, page: ft.Page, content_column: ft.Column):
 
         # --- Parte 1: Criar um arquivo Excel de exemplo ---
         dados = {
-            'Nome': ['João', 'Maria', 'Pedro', 'Ana'],
-            'Idade': [25, 30, 35, 28],
-            'Pontuacao': [85, 92, 78, 95]
+            'Nome': ['Rosca', 'Rosca Martelo', 'Tríceps', 'Pull Up'],
+            'Repetições': ['8-12', '8-12', '8-12', '8-12'],
+            'Séries': [4, 3, 5, 3]
         }
         df = pd.DataFrame(dados)
         caminho_arquivo_original = 'dados_originais.xlsx'
