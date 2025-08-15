@@ -3,3 +3,5 @@ python-dotenv
 httpx
 oauthlib
 requests_oauthlib
+pandas
+openpyxl
