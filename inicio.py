@@ -53,11 +53,6 @@ def paginaInicio(page: ft.Page):
     appbar_inicio = ft.CupertinoAppBar(
         leading=ft.IconButton(icon=ft.Icons.WB_SUNNY_OUTLINED, on_click=check_item_clicked, icon_size=20),
         middle=ft.Text("Treino Quest"),
-        trailing=ft.IconButton(
-            icon=ft.Icons.LOGOUT,
-            on_click=logoff_clicked,
-            icon_size=20
-        ),
         bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,
     )
 
