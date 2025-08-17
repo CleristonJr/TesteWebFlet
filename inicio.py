@@ -2,25 +2,15 @@ import flet as ft
 import pandas as pd
 import os
 
-# Esta função encapsula toda a lógica de manipulação do Excel.
-# Ela será chamada por um evento, como o clique de um botão.
 def manipular_excel(e, page: ft.Page, content_column: ft.Column):
-    """
-    Cria um arquivo Excel de exemplo, o lê, faz alterações e salva um novo arquivo.
-    Exibe o resultado na interface do Flet.
-    """
+    
     try:
         # Limpa o conteúdo anterior
         content_column.controls.clear()
         content_column.controls.append(ft.Text("Iniciando a manipulação do Excel...", size=16))
         page.update()
 
-        # --- Parte 1: Criar um arquivo Excel de exemplo ---
-        dados = {
-            'Nome': ['Rosca', 'Rosca Martelo', 'Tríceps', 'Pull Up'],
-            'Repetições': ['8-12', '8-12', '8-12', '8-12'],
-            'Séries': [4, 3, 5, 3]
-        }
+        
         df = pd.DataFrame(dados)
         caminho_arquivo_original = 'dados_originais.xlsx'
         df.to_excel(caminho_arquivo_original, index=False)
@@ -70,19 +60,19 @@ def paginaInicio(page: ft.Page):
     )
 
     def check_item_clicked(e):
-        """Alterna o tema da página entre claro e escuro."""
+        
         page.theme_mode = (
             ft.ThemeMode.LIGHT if page.theme_mode != ft.ThemeMode.LIGHT else ft.ThemeMode.DARK
         )
         page.update()
 
     def tela_Treino(e):
-        """Navega para a página de treino (navegação comentada)."""
+        
         print("Navegando para Treino")
         # page.go("/treino")
 
     def destino_selecionado(e):
-        """Lida com a navegação do NavigationRail (navegação comentada)."""
+        
         if rail.selected_index == 1:
             print("Alterar Treino selecionado!")
             # page.go("/alterarTreino")
