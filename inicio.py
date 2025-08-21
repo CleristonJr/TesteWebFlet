@@ -5,40 +5,27 @@ import os
 def manipular_excel(e, page: ft.Page, content_column: ft.Column):
     
     try:
+
+        caminho_arquivo_original = 'https://raw.githubusercontent.com/CleristonJr/TesteWebFlet/main/Sheet2WPSOffice.xlsx'
+
         # Limpa o conteúdo anterior
         content_column.controls.clear()
-        content_column.controls.append(ft.Text("Iniciando a manipulação do Excel...", size=16))
+        content_column.controls.append(ft.Text("Iniciando a leitura do Excel...", size=16))
         page.update()
 
-        
+        #url_raw = 'https://raw.githubusercontent.com/CleristonJr/TesteWebFlet/main/Sheet2WPSOffice.xlsx'
         df = pd.DataFrame(dados)
-        caminho_arquivo_original = 'https://github.com/CleristonJr/TesteWebFlet/blob/main/Sheet2WPSOffice.xlsx'
-        df.to_excel(caminho_arquivo_original, index=False)
-        content_column.controls.append(ft.Text(f"Arquivo '{caminho_arquivo_original}' criado com sucesso."))
-        page.update()
 
-        # --- Parte 2: Ler e Alterar o arquivo Excel ---
-        df_lido = pd.read_excel(caminho_arquivo_original)
         content_column.controls.append(ft.Text("\nConteúdo original do arquivo:"))
-        content_column.controls.append(ft.Text(df_lido.to_string()))
-        
-        df_lido['Bonus'] = df_lido['Pontuacao'] * 0.10
-        df_lido.loc[df_lido['Nome'] == 'João', 'Idade'] = 26
-        
-        content_column.controls.append(ft.Text("\nConteúdo após as alterações:"))
-        content_column.controls.append(ft.Text(df_lido.to_string()))
+        content_column.controls.append(ft.Text(df.to_string()))
         page.update()
-
-        # --- Parte 3: Salvar as alterações em um novo arquivo ---
-        caminho_arquivo_alterado = 'dados_alterados.xlsx'
-        df_lido.to_excel(caminho_arquivo_alterado, index=False)
-        content_column.controls.append(ft.Text(f"\nAlterações salvas com sucesso em '{caminho_arquivo_alterado}'."))
-        
-    except FileNotFoundError:
-        content_column.controls.append(ft.Text(f"Erro: O arquivo '{caminho_arquivo_original}' não foi encontrado."))
-    except Exception as e:
-        content_column.controls.append(ft.Text(f"Ocorreu um erro ao processar o arquivo: {e}"))
-    
+      
+        '''
+        except FileNotFoundError:
+            content_column.controls.append(ft.Text(f"Erro: O arquivo '{caminho_arquivo_original}' não foi encontrado."))
+        except Exception as e:
+            content_column.controls.append(ft.Text(f"Ocorreu um erro ao processar o arquivo: {e}"))
+        '''
     page.update()
 
 
