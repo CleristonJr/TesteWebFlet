@@ -21,12 +21,9 @@ def manipular_excel(e, page: ft.Page, content_column: ft.Column):
         page.update()
       
    
-    except FileNotFoundError:
-        content_column.controls.append(ft.Text(f"Erro: O arquivo '{caminho_arquivo_original}' não foi encontrado."))
     except Exception as e:
         content_column.controls.append(ft.Text(f"Ocorreu um erro ao processar o arquivo: {e}"))
-    
-    page.update()
+        page.update()
 
 
 def paginaInicio(page: ft.Page):
