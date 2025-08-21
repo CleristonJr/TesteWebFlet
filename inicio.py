@@ -14,7 +14,7 @@ def manipular_excel(e, page: ft.Page, content_column: ft.Column):
         page.update()
 
         #url_raw = 'https://raw.githubusercontent.com/CleristonJr/TesteWebFlet/main/Sheet2WPSOffice.xlsx'
-        df = pd.DataFrame(dados)
+        df = pd.DataFrame(caminho_arquivo_original)
 
         content_column.controls.append(ft.Text("\nConteúdo original do arquivo:"))
         content_column.controls.append(ft.Text(df.to_string()))
