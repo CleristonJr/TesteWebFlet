@@ -20,12 +20,12 @@ def manipular_excel(e, page: ft.Page, content_column: ft.Column):
         content_column.controls.append(ft.Text(df.to_string()))
         page.update()
       
-        '''
-        except FileNotFoundError:
-            content_column.controls.append(ft.Text(f"Erro: O arquivo '{caminho_arquivo_original}' não foi encontrado."))
-        except Exception as e:
-            content_column.controls.append(ft.Text(f"Ocorreu um erro ao processar o arquivo: {e}"))
-        '''
+   
+    except FileNotFoundError:
+        content_column.controls.append(ft.Text(f"Erro: O arquivo '{caminho_arquivo_original}' não foi encontrado."))
+    except Exception as e:
+        content_column.controls.append(ft.Text(f"Ocorreu um erro ao processar o arquivo: {e}"))
+    
     page.update()
 
 
